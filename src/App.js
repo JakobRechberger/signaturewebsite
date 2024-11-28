@@ -1,22 +1,29 @@
 
-import NavbarSite from "./templates/navbar";
 
-import FileUpload from "./templates/FileUpload";
-
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import TimestampVerification from "./templates/TimestampVerification";
+import React from "react";
+import Misc from "./templates/Misc";
+import SupervisorView from "./templates/supervisor/SupervisorView";
+import ContributorView from "./templates/contributor/ContributorView";
 
 function App() {
 
     return (
         <>
-            <div>
-                <NavbarSite />
-                <div className={'main-page'}>
-                    <FileUpload/>
-                    <TimestampVerification/>
-                </div>
-            </div>
+            <Routes>
+                {/* add other routes here. New routes before default route! Otherwise, it will always math '/' */}
+                <Route path={'/supervisor'} element={<SupervisorView/>} />
+                <Route path={'/contributor'} element={<ContributorView/>} />
+                <Route path={'/misc'} element={<Misc/>} />
+            </Routes>
+
+            <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+                integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+                crossOrigin="anonymous"
+            />
 
 
         </>
