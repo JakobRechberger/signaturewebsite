@@ -1,11 +1,12 @@
 
 import '../../App.css';
-import ProjectDownload from "./ProjectDownload";
+
+import SignProject from "./SignProject";
 
 const ContributorView = () => {
     return (
         <div className="main-page">
-            <ProjectDownload />
+            <SignProject />
         </div>
     );
 }

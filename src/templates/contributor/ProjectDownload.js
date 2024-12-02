@@ -64,7 +64,7 @@ const DownloadPage = () => {
             <h1>Contributor Page</h1>
             <p>{message}</p>
                 <Button variant="primary" onClick={handleDownload} style={{ marginTop: "20px" }} disabled={isButtonDisabled}>
-                    Download File
+                    Download Project
                 </Button>
         </div>
         );
