@@ -7,12 +7,15 @@ import Misc from "./templates/Misc";
 import SupervisorView from "./templates/supervisor/SupervisorView";
 import ContributorView from "./templates/contributor/ContributorView";
 
+import MainView from "./templates/MainView";
+
 function App() {
 
     return (
         <>
             <Routes>
                 {/* add other routes here. New routes before default route! Otherwise, it will always math '/' */}
+                <Route path={'/'} element={<MainView/>} />
                 <Route path={'/supervisor'} element={<SupervisorView/>} />
                 <Route path={'/contributor'} element={<ContributorView/>} />
                 <Route path={'/misc'} element={<Misc/>} />
