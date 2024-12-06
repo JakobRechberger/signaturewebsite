@@ -8,6 +8,7 @@ import SupervisorView from "./templates/supervisor/SupervisorView";
 import ContributorView from "./templates/contributor/ContributorView";
 
 import MainView from "./templates/MainView";
+import ProjectContributorTable from "./templates/supervisor/ProjectContributorTable";
 
 function App() {
 
@@ -15,10 +16,11 @@ function App() {
         <>
             <Routes>
                 {/* add other routes here. New routes before default route! Otherwise, it will always math '/' */}
-                <Route path={'/'} element={<MainView/>} />
                 <Route path={'/supervisor'} element={<SupervisorView/>} />
                 <Route path={'/contributor'} element={<ContributorView/>} />
+                <Route path={'/supervisor/project_contributors'} element={<ProjectContributorTable/>} />
                 <Route path={'/misc'} element={<Misc/>} />
+                <Route path={'/'} element={<MainView/>} />
             </Routes>
 
             <link

@@ -51,7 +51,7 @@ const TimestampVerification = () => {
 return (
     <>
         <div className="second">
-        <h5>Select the timestamped file and the timestamp (filename_timestamp.tsr) to verify this file </h5>
+            <h5>Select the timestamped file and the timestamp (filename_timestamp.tsr) to verify this file </h5>
             <div>
                 <p>First File (any type):</p>
                 <InputGroup className="mb-3">

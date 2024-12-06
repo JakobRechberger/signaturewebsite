@@ -80,7 +80,7 @@ const ProjectSelector = () => {
                         </InputGroup>
                         </div>
                     </div>
-                    <Button variant="primary" onClick={handleSubmit}>Fetch Contributors</Button>
+                    <Button variant="primary" className="mb-3" onClick={handleSubmit}>Fetch Contributors</Button>
                     {responseMessage && (
                         <div style={{ marginTop: "20px", color: "green" }}>
                             <h5>

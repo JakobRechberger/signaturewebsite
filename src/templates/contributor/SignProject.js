@@ -23,8 +23,6 @@ const SignProject = () => {
             return;
         }
         setToken(tokenFromUrl);
-
-        // Validate token when component loads
         axios
             .get(`/api/contributor?token=${tokenFromUrl}`)
             .then((response) => {
