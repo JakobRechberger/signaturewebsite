@@ -162,9 +162,9 @@ const SignProject = () => {
 
     return (
         <div style={{ padding: "20px" }}>
-            <h1>Sign and Download Project</h1>
+            <h3>Download Project</h3>
 
-            <h5>Enter the hash value to verify the file:</h5>
+            <p style={{marginBottom:"10px",}}>Enter the hash value to verify the file:</p>
             <InputGroup className="mb-3">
                 <Form.Control
                     type="text"
@@ -180,23 +180,14 @@ const SignProject = () => {
                 <Button
                     variant="primary"
                     onClick={handleDownload}
-                    style={{ marginTop: "20px" }}
                     disabled={!isVerified}
                 >
                     Download Project
                 </Button>
             </div>
-
-            <h5 >Select the project to sign it</h5>
-            <div>
-                <p>Project file (.zip)</p>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        type="file"
-                        onChange={handleFileChange}
-                        disabled={!isVerified}
-                    />
-                </InputGroup>
+            <div style={{marginTop: "10vh",}}>
+                <hr></hr>
+                <h3>Submit Response</h3>
             </div>
             <div>
                 <Button
@@ -205,7 +196,7 @@ const SignProject = () => {
                     onClick={handleSubmit}
                     disabled={!isVerified}
                 >
-                    Sign Project
+                    Approve Changes and Sign
                 </Button>
             </div>
             <div>

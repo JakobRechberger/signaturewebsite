@@ -23,8 +23,10 @@ const ProjectStatus = () => {
 
     return (
         <>
-        <div>
-            <h5>Enter the project git name</h5>
+        <div style={{marginTop: "10vh",}}>
+            <hr></hr>
+            <h3>Progress Monitoring</h3>
+            <p style={{marginBottom:"10px",}}>Enter the project git name</p>
             <InputGroup className="mb-3">
                 <Form.Control
                     type="text"

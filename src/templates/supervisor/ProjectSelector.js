@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Button, InputGroup} from "react-bootstrap";
+import {Button, Image, InputGroup, OverlayTrigger, Tooltip} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import React from "react";
 
@@ -7,6 +7,7 @@ const ProjectSelector = () => {
     const [repoUrl, setRepoUrl] = useState("");
     const [responseMessage, setResponseMessage] = useState("");
     const [startDate, setStartDate] = useState("");
+    const [executeTest, setExecuteTest] = useState(false);
     const today = new Date().toISOString().substr(0, 10);
     const [endDate, setEndDate] = useState(today);
     const handleStartDateChange = (event) => {
@@ -16,10 +17,18 @@ const ProjectSelector = () => {
     const handleEndDateChange = (event) => {
         setEndDate(event.target.value);
     };
+    const handleExecuteTestChange = (event) => {
+        setExecuteTest(event.target.checked);
+    };
 
     const handleInputChange = (event) => {
         setRepoUrl(event.target.value);
     };
+    const renderTooltip = (props) => (
+        <Tooltip id="info-tooltip" {...props}>
+            Execute all tests in the test folder of the specified repository. (Builds the project and adds test reports -> similar to CI pipeline)
+        </Tooltip>
+    );
     const handleSubmit = async () => {
         try {
             if (!repoUrl) {
@@ -30,6 +39,7 @@ const ProjectSelector = () => {
             formData.append("repoUrl", repoUrl);
             formData.append("startDate", startDate);
             formData.append("endDate", endDate);
+            formData.append("executeTests", executeTest);
 
             const response = await fetch("http://localhost:8080/api/supervisor/initWorkflow", {
                 method: "POST",
@@ -48,7 +58,8 @@ const ProjectSelector = () => {
     };
         return (
             <>
-                <h5>Enter a Git Repository URL for Validation Process</h5>
+                <h3>Initiate Process</h3>
+                <p style={{marginBottom:"10px",}}>Enter a Git Repository URL for Validation Process</p>
                 <div>
                     <InputGroup className="mb-3">
                         <Form.Control
@@ -60,7 +71,7 @@ const ProjectSelector = () => {
                     </InputGroup>
                     <div className="date-input">
                         <div>
-                            <p>Enter a start date to fetch contributors (ideally date of last audit)</p>
+                            <p style={{marginBottom:"10px",}}>Enter a start date to fetch contributors (ideally date of last audit)</p>
                         <InputGroup className="mb-3">
                             <Form.Control
                                 type="date"
@@ -69,7 +80,7 @@ const ProjectSelector = () => {
                                 onChange={handleStartDateChange}
                             />
                         </InputGroup>
-                        <p>Enter an end date</p>
+                        <p style={{marginBottom:"10px",}}>Enter an end date</p>
                         <InputGroup className="mb-3">
                             <Form.Control
                                 type="date"
@@ -80,7 +91,34 @@ const ProjectSelector = () => {
                         </InputGroup>
                         </div>
                     </div>
-                    <Button variant="primary" className="mb-3" onClick={handleSubmit}>Fetch Contributors</Button>
+                    <div className="mb-3">
+                        <div className=" d-flex align-items-center gap-1">
+                            <p style={{marginBottom:0}}>Execute tests</p>
+                            <OverlayTrigger placement="right" overlay={renderTooltip}>
+                                <Image
+                                    src="/question-svgrepo-com.svg"
+                                    style={{
+                                        width: '10px',
+                                        height: '10px',
+                                        cursor: 'pointer',
+                                    }}
+                                />
+                            </OverlayTrigger>
+                        </div>
+                        <Form>
+                            <div className="custom-switch-container">
+                                <Form.Check
+                                    type="checkbox"
+                                    id="custom-switch"
+                                    onChange={handleExecuteTestChange}
+                                    checked={executeTest}
+                                    className="big-switch"
+                                />
+                            </div>
+
+                        </Form>
+                    </div>
+                    <Button variant="primary" className="mb-3" onClick={handleSubmit}>Start Process</Button>
                     {responseMessage && (
                         <div style={{ marginTop: "20px", color: "green" }}>
                             <h5>
