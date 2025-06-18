@@ -47,6 +47,25 @@ const ProjectContributorTable= () => {
 
         fetchUsers()
     }, [projectName]);
+    const resendMail = async (email) => {
+        try {
+            const response = await fetch(`/api/supervisor/resendEmail?email=${encodeURIComponent(email)}&projectName=${encodeURIComponent(projectName)}`, {
+                method: "GET",
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to resend email");
+            }
+
+            const result = await response.text();
+            if (result === "ok") {
+                alert(`Email resent to ${email}`);
+            }
+        } catch (error) {
+            console.error("Error resending email:", error);
+            alert("An error occurred while resending the email.");
+        }
+    }
     return(
         <div className="main-page">
             <h2>Contributors for Project: {projectName}</h2>
@@ -69,7 +88,7 @@ const ProjectContributorTable= () => {
                                 {user.signatureStatus}
                             </td>
                             <td className="p-1">{user.signatureStatus !== "User signed" && (
-                                <Button variant="secondary" size="sm">Resend email</Button>
+                                <Button variant="secondary" size="sm" onClick={() => resendMail(user.email, projectName)}>Resend email</Button>
                             )}</td>
                             </tr>
                             ))}
